@@ -7,14 +7,37 @@
 </head>
 <body>
     <div id="app">
-        {{ message }}
+        <p>{{ message }}</p>
+        <button v-on:click="delta">Press Me</button>
+        <hr>
+        <input type="text" v-model="message" placeholder="message">
+        
+        <hr>
+        <h4>inch to cm</h4>
+        <p>Length by inch</p>
+        <input type="text" v-model="inchValue">
+        <p>{{cmValue}} cm</p>
+        <button v-on:click="convertUnit">Convert</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         const app = new Vue({
             el: '#app',
             data: {
-                message: 'Hello Vue'
+                message: 'Hello Vue',
+                message1: 'Hello World',
+                message2: 'Hello World',
+                inchValue: 0.0,
+                cmValue: 0.0
+            },
+            methods: {
+                
+                delta: function(){
+                    this.message = "Kia ora";
+                },
+                convertUnit: function(){
+                    this.cmValue = this.inchValue * 2.54;
+                }
             }
         })
     </script>
