@@ -3,30 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Carls VUE Page</title>
 </head>
 <body>
-    <div id="app">
-        <p>{{ message }}</p>
-        <button v-on:click="delta">Press Me</button>
-        <hr>
-        <input type="text" v-model="message" placeholder="message">
+    <br />
+    <div id="app" class="container">
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <input class="form-control" type="text" v-model="inchValue" id="inchValue">
+            </div>
+            <label for="inchValue" class="col-sm-2 col-form-label">inch</label>
+            <div class="col-sm-1">
+                <p>=</p>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" readonly class="form-control-plaintext" v-bind:value="cmValue" id="cmValue">
+            </div>
+            <label for="cmValue" class="col-sm-2 col-form-label">cm</label>
+        </div>
         
-        <hr>
-        <h4>inch to cm</h4>
-        <p>Length by inch</p>
-        <input type="text" v-model="inchValue">
-        <p>{{cmValue}} cm</p>
-        <button v-on:click="convertUnit">Convert</button>
+        
+        <button v-on:click="convertUnit" class="btn btn-primary">Convert</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         const app = new Vue({
             el: '#app',
             data: {
-                message: 'Hello Vue',
-                message1: 'Hello World',
-                message2: 'Hello World',
                 inchValue: 0.0,
                 cmValue: 0.0
             },
