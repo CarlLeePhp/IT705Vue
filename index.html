@@ -9,41 +9,47 @@
 <body>
     <br />
     <div id="app" class="container">
+        <h4>Length Converter</h4>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="inch" value="inch" v-model="convertMode">
+            <label class="form-check-label" for="inch">To inch</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="cm" value="cm" v-model="convertMode">
+            <label class="form-check-label" for="cm">To cm</label>
+        </div>
+
+        <br />
+        
         <div class="form-group row">
             <div class="col-sm-3">
-                <input class="form-control" type="text" v-model="inchValue" id="inchValue">
+                <input class="form-control" type="text" v-model="inputValue" id="inputValue">
             </div>
-            <label for="inchValue" class="col-sm-2 col-form-label">inch</label>
+            <label for="inputValue" class="col-sm-2 col-form-label" v-text="inputUnit">inch</label>
             <div class="col-sm-1">
                 <p>=</p>
             </div>
             <div class="col-sm-3">
-                <input type="text" readonly class="form-control-plaintext" v-bind:value="cmValue" id="cmValue">
+                <input type="text" readonly class="form-control-plaintext" v-bind:value="outputValue" id="outputValue">
             </div>
-            <label for="cmValue" class="col-sm-2 col-form-label">cm</label>
+            <label for="outputValue" class="col-sm-2 col-form-label" v-text="outputUnit">cm</label>
         </div>
         
+        <!--
+            <button v-on:click="convertUnit" class="btn btn-primary">Convert</button>
+        -->
         
-        <button v-on:click="convertUnit" class="btn btn-primary">Convert</button>
+
+
+        <p v-text="message"></p>
     </div>
+
+    
+    
+    
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-        const app = new Vue({
-            el: '#app',
-            data: {
-                inchValue: 0.0,
-                cmValue: 0.0
-            },
-            methods: {
-                
-                delta: function(){
-                    this.message = "Kia ora";
-                },
-                convertUnit: function(){
-                    this.cmValue = this.inchValue * 2.54;
-                }
-            }
-        })
-    </script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
