@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Carls VUE Page</title>
+</head>
+<body>
+    <br />
+    <div id="app" class="d-flex flex-column ">
+        <div class="d-flex flex-row justify-content-center">
+            <img v-bind:src="imageurl" v-bind:width="imageWidth" v-bind:height="imageHeight">
+        </div>
+        <br />
+        <br />
+        <div class="d-flex flex-row justify-content-center">
+            <button class="btn btn-primary" v-on:click="buttonHandler">Next</button>
+        </div>
+        
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app=new Vue({
+            el: '#app',
+            data: {
+                isScene: true,
+                imageurl: './img/scene.jpg',
+                imageWidth: 800,
+                imageHeight: 292
+            },
+            methods:{
+                buttonHandler: function(){
+                    if(this.isScene){
+                        this.imageurl = './img/meerkat.jpg'
+                        this.imageWidth = 192
+                        this.imageHeight = 254
+                        this.isScene = false
+                    } else {
+                        this.imageurl = './img/scene.jpg'
+                        this.imageWidth = 800
+                        this.imageHeight = 292
+                        this.isScene = true
+                    }
+                    
+                }
+            }
+        });
+    </script>
+</body>
+</html>
