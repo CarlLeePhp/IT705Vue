@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Carls VUE Page</title>
+</head>
+<body>
+    <br />
+    <div id="app" class="d-flex flex-column ">
+        <div class="d-flex flex-row justify-content-center">
+            <img v-bind:src="drawcell(0)" width=120 height=120 class="border" @click="clickHandler(0)">
+            <img v-bind:src="drawcell(1)" width=120 height=120 class="border" @click="clickHandler(1)">
+            <img v-bind:src="drawcell(2)" width=120 height=120 class="border" @click="clickHandler(2)">
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <img v-bind:src="drawcell(3)" width=120 height=120 class="border" @click="clickHandler(3)">
+            <img v-bind:src="drawcell(4)" width=120 height=120 class="border" @click="clickHandler(4)">
+            <img v-bind:src="drawcell(5)" width=120 height=120 class="border" @click="clickHandler(5)">
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <img v-bind:src="drawcell(6)" width=120 height=120 class="border" @click="clickHandler(6)">
+            <img v-bind:src="drawcell(7)" width=120 height=120 class="border" @click="clickHandler(7)">
+            <img v-bind:src="drawcell(8)" width=120 height=120 class="border" @click="clickHandler(8)">
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <h4>{{message}}</h4>
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app=new Vue({
+            el: '#app',
+            data: {
+                message: 'Nought Turn',
+                isNought: true,
+                list: [0,0,0,0,0,0,0,0,0],
+                steps: 0,
+                isStop: false
+            },
+            methods:{
+                
+                drawcell: function(index){
+                    if(this.list[index] == 0){
+                        return "./img/blank.jpg"
+                    } else if(this.list[index] == 1) {
+                        return "./img/nought.jpg"
+                    } else {
+                        return "./img/cross.jpg"
+                    }
+                },
+                clickHandler: function(index){
+                    if(this.isStop) return
+                    if(this.list[index] == 0){
+                        if(this.isNought){
+                            this.$set(this.list, index, 1)
+                            this.message = "Cross Turn"
+                        } else {
+                            this.$set(this.list, index, 2)
+                            this.message = "Nought Turn"
+                        }
+                        this.isNought = !this.isNought
+                        this.steps++
+                    }
+                    this.checkResult()
+                },
+                checkResult: function(){
+                    if((this.list[0] == 1 && this.list[1] == 1 && this.list[2] == 1) ||
+                    (this.list[3] == 1 && this.list[4] == 1 && this.list[5] == 1) || 
+                    (this.list[6] == 1 && this.list[7] == 1 &&  this.list[8] == 1) ||
+                    (this.list[0] == 1 && this.list[3] == 1 && this.list[6] == 1) ||
+                    (this.list[1] == 1 && this.list[4] == 1 && this.list[7] == 1) ||
+                    (this.list[2] == 1 && this.list[5] == 1 && this.list[8] == 1) ||
+                    (this.list[0] == 1 && this.list[4] == 1 && this.list[8] == 1) ||
+                    (this.list[2] == 1 && this.list[4] == 1 && this.list[6] == 1)){
+                        this.message = "Nought Won"
+                        this.reset()
+                    }
+                    if((this.list[0] == 2 && this.list[1] == 2 && this.list[2] == 2) ||
+                    (this.list[3] == 2 && this.list[4] == 2 && this.list[5] == 2) || 
+                    (this.list[6] == 2 && this.list[7] == 2 &&  this.list[8] == 2) ||
+                    (this.list[0] == 2 && this.list[3] == 2 && this.list[6] == 2) ||
+                    (this.list[1] == 2 && this.list[4] == 2 && this.list[7] == 2) ||
+                    (this.list[2] == 2 && this.list[5] == 2 && this.list[8] == 2) ||
+                    (this.list[0] == 2 && this.list[4] == 2 && this.list[8] == 2) ||
+                    (this.list[2] == 2 && this.list[4] == 2 && this.list[6] == 2)){
+                        this.message = "Cross Won"
+                        this.reset()
+                    }
+                    if(this.steps == 9) {
+                        this.message = "Draw"
+                        this.reset()
+                    }
+                },
+                reset: function(){
+                    this.isStop = true
+                    window.setTimeout(() => {
+                        this.steps = 0;
+                        for(i=0;i<9;i++){
+                            this.$set(this.list, i, 0)
+                        }
+                        this.message = 'Nought Turn',
+                        this.isNought = true,
+                        this.isStop = false
+                    }, 2000)
+                }
+            }
+        });
+    </script>
+</body>
+</html>
