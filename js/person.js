@@ -2,7 +2,8 @@ const app = new Vue({
     el: '#app',
     data: {
         person: null,
-        people: null
+        people: null,
+        selected: 0
     },
     computed: {
         username: function(){

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Country Lab Exercise</title>
+</head>
+<body>
+    <br>
+    <div id="app" class="container">
+        <select v-model="selected">
+            <option value="none" disabled>Select a country</option>
+            <option v-for="country in countries" :key="country.Code" v-bind:value="country.Code">{{ country.Name }}</option>
+        </select>
+        <hr>
+        <ul v-if="index >= 0">
+            <li>Name: {{countries[index].Name}}</li>
+            <li>Region: {{countries[index].Region}}</li>
+            <li>SurfaceArea: {{countries[index].SurfaceArea}}</li>
+            <li>Population: {{countries[index].Population}}</li>
+            <li>Local Name: {{countries[index].LocalName}}</li>
+        </ul>
+        <img :src="flagImage" @error="altimage">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.js"></script>
+    <script src="./js/countrylab.js"></script>
+</body>
+</html>

@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    <div id="app">
-        {{ people }}
-        <hr>
+    <div id="app" class="container">
         <ul>
             <li v-for="p in people">{{ p.name }}</li>
         </ul>
-        
+        <select v-model="selected">
+            <option value="0" disabled>Select a person</option>
+            <option v-for="p in people" :key="p.id" v-bind:value="p.id">{{p.name}}</option>
+        </select>
+        <hr>
+        <p>{{ selected }}</p>
+        <hr>
+        <p>{{ selected > 0?people[selected].name:"" }}</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.js"></script>
